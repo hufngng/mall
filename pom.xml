@@ -82,7 +82,7 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--解决JDK 11 兼容性问题-->
+    <!-- Fix JDK 11 compatibility issues -->
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
@@ -92,55 +92,55 @@
 
     <dependencyManagement>
         <dependencies>
-            <!--mall通用模块-->
+            <!-- mall common module -->
             <dependency>
                 <groupId>com.macro.mall</groupId>
                 <artifactId>mall-common</artifactId>
                 <version>${mall-common.version}</version>
             </dependency>
-            <!--mall中MBG生成模块-->
+            <!-- mall MBG generated module -->
             <dependency>
                 <groupId>com.macro.mall</groupId>
                 <artifactId>mall-mbg</artifactId>
                 <version>${mall-mbg.version}</version>
             </dependency>
-            <!--mall安全模块-->
+            <!-- mall security module -->
             <dependency>
                 <groupId>com.macro.mall</groupId>
                 <artifactId>mall-security</artifactId>
                 <version>${mall-security.version}</version>
             </dependency>
-            <!--MyBatis分页插件starter-->
+            <!-- MyBatis pagination plugin starter -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
                 <version>${pagehelper-starter.version}</version>
             </dependency>
-            <!--MyBatis分页插件-->
+            <!-- MyBatis pagination plugin -->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper</artifactId>
                 <version>${pagehelper.version}</version>
             </dependency>
-            <!--集成druid连接池-->
+            <!-- Integrate druid connection pool -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-            <!--Hutool Java工具包-->
+            <!-- Hutool Java utility library -->
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
-            <!--Swagger-UI API文档生产工具-->
+            <!-- Swagger-UI API documentation tool -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${springfox-swagger.version}</version>
             </dependency>
-            <!--解决Swagger访问主页时的NumberFormatException问题-->
+            <!-- Fix NumberFormatException when accessing Swagger home page -->
             <dependency>
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-models</artifactId>
@@ -151,7 +151,7 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger-annotations.version}</version>
             </dependency>
-            <!-- MyBatis 生成器 -->
+            <!-- MyBatis Generator -->
             <dependency>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-core</artifactId>
@@ -163,31 +163,31 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-            <!--Mysql数据库驱动-->
+            <!-- MySQL database driver -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
             </dependency>
-            <!--SpringData工具包-->
+            <!-- Spring Data toolkit -->
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-commons</artifactId>
                 <version>${spring-data-commons.version}</version>
             </dependency>
-            <!--JWT(Json Web Token)登录支持-->
+            <!-- JWT (Json Web Token) login support -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
-            <!-- 阿里云OSS -->
+            <!-- Alibaba Cloud OSS -->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun-oss.version}</version>
             </dependency>
-            <!--集成logstash-->
+            <!-- Integrate logstash -->
             <dependency>
                 <groupId>net.logstash.logback</groupId>
                 <artifactId>logstash-logback-encoder</artifactId>
@@ -214,7 +214,7 @@
                     <artifactId>docker-maven-plugin</artifactId>
                     <version>${docker.maven.plugin.version}</version>
                         <executions>
-                            <!--如果想在项目打包时构建镜像添加-->
+                            <!-- Add this if you want to build images during project packaging -->
                             <execution>
                                 <id>build-image</id>
                                 <phase>package</phase>
@@ -224,29 +224,29 @@
                             </execution>
                         </executions>
                     <configuration>
-                        <!-- Docker 远程管理地址-->
+                        <!-- Docker remote management address -->
                         <dockerHost>${docker.host}</dockerHost>
                         <images>
                             <image>
-                                <!--定义镜像名称-->
+                                <!-- Define image name -->
                                 <name>mall/${project.name}:${project.version}</name>
-                                <!--定义镜像构建行为-->
+                                <!-- Define image build behavior -->
                                 <build>
-                                    <!--定义基础镜像-->
+                                    <!-- Define base image -->
                                     <from>openjdk:8</from>
                                     <args>
                                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                                     </args>
-                                    <!--定义哪些文件拷贝到容器中-->
+                                    <!-- Define which files to copy into the container -->
                                     <assembly>
-                                        <!--定义拷贝到容器的目录-->
+                                        <!-- Define the directory to copy into the container -->
                                         <targetDir>/</targetDir>
-                                        <!--只拷贝生成的jar包-->
+                                        <!-- Only copy the generated jar -->
                                         <descriptorRef>artifact</descriptorRef>
                                     </assembly>
-                                    <!--定义容器启动命令-->
+                                    <!-- Define container start command -->
                                     <entryPoint>["java", "-jar","-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]</entryPoint>
-                                    <!--定义维护者-->
+                                    <!-- Define maintainer -->
                                     <maintainer>macrozheng</maintainer>
                                 </build>
                             </image>
@@ -258,7 +258,7 @@
         </pluginManagement>
     </build>
 
-    <!--使用aliyun的Maven镜像源提升下载速度-->
+    <!-- Use Aliyun's Maven mirror to speed up downloads -->
     <repositories>
         <repository>
             <id>aliyunmaven</id>
@@ -272,7 +272,7 @@
         </repository>
     </repositories>
 
-    <!--使用aliyun的镜像源提升插件下载速度-->
+    <!-- Use Aliyun mirror to speed up plugin downloads -->
     <pluginRepositories>
         <pluginRepository>
             <id>aliyunmaven</id>
