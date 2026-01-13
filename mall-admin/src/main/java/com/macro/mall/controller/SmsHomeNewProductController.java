@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 首页新品管理Controller
+ * Home new product management Controller
  * Created by macro on 2018/11/6.
  */
 @Controller
 @Api(tags = "SmsHomeNewProductController")
-@Tag(name = "SmsHomeNewProductController", description = "首页新品管理")
+@Tag(name = "SmsHomeNewProductController", description = "Home New Product Management")
 @RequestMapping("/home/newProduct")
 public class SmsHomeNewProductController {
     @Autowired
     private SmsHomeNewProductService homeNewProductService;
 
-    @ApiOperation("添加首页新品")
+    @ApiOperation("Add home new products")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody List<SmsHomeNewProduct> homeNewProductList) {
@@ -36,7 +36,7 @@ public class SmsHomeNewProductController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("修改首页新品排序")
+    @ApiOperation("Update home new product sort order")
     @RequestMapping(value = "/update/sort/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateSort(@PathVariable Long id, Integer sort) {
@@ -47,7 +47,7 @@ public class SmsHomeNewProductController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("批量删除首页新品")
+    @ApiOperation("Batch delete home new products")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
@@ -58,7 +58,7 @@ public class SmsHomeNewProductController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("批量修改首页新品状态")
+    @ApiOperation("Batch update home new product status")
     @RequestMapping(value = "/update/recommendStatus", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult updateRecommendStatus(@RequestParam("ids") List<Long> ids, @RequestParam Integer recommendStatus) {
@@ -69,7 +69,7 @@ public class SmsHomeNewProductController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("分页查询首页新品")
+    @ApiOperation("List home new products (paged)")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<SmsHomeNewProduct>> list(@RequestParam(value = "productName", required = false) String productName,

@@ -5,16 +5,16 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- * 请求工具类
+ * Request utility class
  * Created by macro on 2020/10/8.
  */
 public class RequestUtil {
 
     /**
-     * 获取请求真实IP地址
+     * Get the real IP address of the request
      */
     public static String getRequestIp(HttpServletRequest request) {
-        //通过HTTP代理服务器转发时添加
+    // Added when forwarded through an HTTP proxy server
         String ipAddress = request.getHeader("x-forwarded-for");
         if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
             ipAddress = request.getHeader("Proxy-Client-IP");
@@ -24,7 +24,7 @@ public class RequestUtil {
         }
         if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
             ipAddress = request.getRemoteAddr();
-            // 从本地访问时根据网卡取本机配置的IP
+            // When accessed locally, get the machine's IP configured on the network interface
             if (ipAddress.equals("127.0.0.1") || ipAddress.equals("0:0:0:0:0:0:0:1")) {
                 InetAddress inetAddress = null;
                 try {
@@ -35,7 +35,7 @@ public class RequestUtil {
                 ipAddress = inetAddress.getHostAddress();
             }
         }
-        // 通过多个代理转发的情况，第一个IP为客户端真实IP，多个IP会按照','分割
+    // In case of multiple proxy forwarding, the first IP is the client's real IP; multiple IPs are separated by ','
         if (ipAddress != null && ipAddress.length() > 15) {
             if (ipAddress.indexOf(",") > 0) {
                 ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));

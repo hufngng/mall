@@ -6,33 +6,33 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 /**
- * 通用分页数据封装类
+ * Common pagination data wrapper
  * Created by macro on 2019/4/19.
  */
 public class CommonPage<T> {
     /**
-     * 当前页码
+     * Current page number
      */
     private Integer pageNum;
     /**
-     * 每页数量
+     * Page size
      */
     private Integer pageSize;
     /**
-     * 总页数
+     * Total pages
      */
     private Integer totalPage;
     /**
-     * 总条数
+     * Total number of items
      */
     private Long total;
     /**
-     * 分页数据
+     * Paged data
      */
     private List<T> list;
 
     /**
-     * 将PageHelper分页后的list转为分页信息
+     * Convert a list paged by PageHelper to pagination information
      */
     public static <T> CommonPage<T> restPage(List<T> list) {
         CommonPage<T> result = new CommonPage<T>();
@@ -46,7 +46,7 @@ public class CommonPage<T> {
     }
 
     /**
-     * 将SpringData分页后的list转为分页信息
+     * Convert a Spring Data paged list to pagination information
      */
     public static <T> CommonPage<T> restPage(Page<T> pageInfo) {
         CommonPage<T> result = new CommonPage<T>();

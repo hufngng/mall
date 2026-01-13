@@ -9,22 +9,22 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * 订单查询自定义Dao
+ * Order query custom Dao
  * Created by macro on 2018/10/12.
  */
 public interface OmsOrderDao {
     /**
-     * 条件查询订单
+     * Conditional order query
      */
     List<OmsOrder> getList(@Param("queryParam") OmsOrderQueryParam queryParam);
 
     /**
-     * 批量发货
+     * Batch delivery
      */
     int delivery(@Param("list") List<OmsOrderDeliveryParam> deliveryParamList);
 
     /**
-     * 获取订单详情
+     * Get order detail
      */
     OmsOrderDetail getDetail(@Param("id") Long id);
 }

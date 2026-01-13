@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 优惠券管理Controller
+ * Coupon Management Controller
  * Created by macro on 2018/8/28.
  */
 @Controller
 @Api(tags = "SmsCouponController")
-@Tag(name = "SmsCouponController", description = "优惠券管理")
+@Tag(name = "SmsCouponController", description = "Coupon Management")
 @RequestMapping("/coupon")
 public class SmsCouponController {
     @Autowired
     private SmsCouponService couponService;
-    @ApiOperation("添加优惠券")
+    @ApiOperation("Add coupon")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult add(@RequestBody SmsCouponParam couponParam) {
@@ -36,7 +36,7 @@ public class SmsCouponController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("删除优惠券")
+    @ApiOperation("Delete coupon")
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@PathVariable Long id) {
@@ -47,7 +47,7 @@ public class SmsCouponController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("修改优惠券")
+    @ApiOperation("Update coupon")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id,@RequestBody SmsCouponParam couponParam) {
@@ -58,7 +58,7 @@ public class SmsCouponController {
         return CommonResult.failed();
     }
 
-    @ApiOperation("根据优惠券名称和类型分页获取优惠券列表")
+    @ApiOperation("Get paged coupon list by name and type")
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<SmsCoupon>> list(
@@ -70,7 +70,7 @@ public class SmsCouponController {
         return CommonResult.success(CommonPage.restPage(couponList));
     }
 
-    @ApiOperation("获取单个优惠券的详细信息")
+    @ApiOperation("Get detailed info for a coupon")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<SmsCouponParam> getItem(@PathVariable Long id) {

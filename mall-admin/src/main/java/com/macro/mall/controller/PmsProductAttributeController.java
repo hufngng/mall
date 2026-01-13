@@ -18,19 +18,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 商品属性管理Controller
+ * Product Attribute Management Controller
  * Created by macro on 2018/4/26.
  */
 @Controller
 @Api(tags = "PmsProductAttributeController")
-@Tag(name = "PmsProductAttributeController", description = "商品属性管理")
+@Tag(name = "PmsProductAttributeController", description = "Product Attribute Management")
 @RequestMapping("/productAttribute")
 public class PmsProductAttributeController {
     @Autowired
     private PmsProductAttributeService productAttributeService;
 
-    @ApiOperation("根据分类查询属性列表或参数列表")
-    @ApiImplicitParams({@ApiImplicitParam(name = "type", value = "0表示属性，1表示参数", required = true, paramType = "query", dataType = "integer")})
+    @ApiOperation("Query attribute list or parameter list by category")
+    @ApiImplicitParams({@ApiImplicitParam(name = "type", value = "0 means attribute, 1 means parameter", required = true, paramType = "query", dataType = "integer")})
     @RequestMapping(value = "/list/{cid}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<CommonPage<PmsProductAttribute>> getList(@PathVariable Long cid,
@@ -41,7 +41,7 @@ public class PmsProductAttributeController {
         return CommonResult.success(CommonPage.restPage(productAttributeList));
     }
 
-    @ApiOperation("添加商品属性信息")
+    @ApiOperation("Add product attribute")
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult create(@RequestBody PmsProductAttributeParam productAttributeParam) {
@@ -53,7 +53,7 @@ public class PmsProductAttributeController {
         }
     }
 
-    @ApiOperation("修改商品属性信息")
+    @ApiOperation("Update product attribute")
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult update(@PathVariable Long id, @RequestBody PmsProductAttributeParam productAttributeParam) {
@@ -65,7 +65,7 @@ public class PmsProductAttributeController {
         }
     }
 
-    @ApiOperation("查询单个商品属性")
+    @ApiOperation("Get single product attribute")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<PmsProductAttribute> getItem(@PathVariable Long id) {
@@ -73,7 +73,7 @@ public class PmsProductAttributeController {
         return CommonResult.success(productAttribute);
     }
 
-    @ApiOperation("批量删除商品属性")
+    @ApiOperation("Batch delete product attributes")
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult delete(@RequestParam("ids") List<Long> ids) {
@@ -85,7 +85,7 @@ public class PmsProductAttributeController {
         }
     }
 
-    @ApiOperation("根据商品分类的id获取商品属性及属性分类")
+    @ApiOperation("Get product attributes and attribute categories by product category id")
     @RequestMapping(value = "/attrInfo/{productCategoryId}", method = RequestMethod.GET)
     @ResponseBody
     public CommonResult<List<ProductAttrInfo>> getAttrInfo(@PathVariable Long productCategoryId) {
